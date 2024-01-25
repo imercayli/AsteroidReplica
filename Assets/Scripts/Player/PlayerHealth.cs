@@ -2,37 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : HealthSystemBase
 {
     private Player _player;
-    public int Health { get; protected set; }
-    public int MaxHealth { get; protected set; }
-    
+    public override CharacterType CharacterType => CharacterType.Player;
+   
     public PlayerHealth Initialize(Player player)
     {
         _player = player;
         return this;
     }
-    
-    public void TakeDamage(int damageAmount =1)
+
+    public override void ApplyDamage(int damage)
     {
-        Health -= damageAmount;
-        Death();
-        
-        if (Health <= 0)
-        {
-            FinishGame();
-        }
-    }
-    
-    private void Death()
-    {
-        
+        base.ApplyDamage(damage);
     }
 
-    private void FinishGame()
+    protected override void Die()
     {
-        
+        GameManager.Instance.FinishGame();
     }
-
 }
