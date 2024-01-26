@@ -30,6 +30,11 @@ public abstract class AttackSystemBase : MonoBehaviour,IAttackable
         //spawn bullet
     }
 
+    protected void Update()
+    {
+        Shoot();
+    }
+
     public virtual void Shoot()
     {
         if(Time.time < FireTime) return;
