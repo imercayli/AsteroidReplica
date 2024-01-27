@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float minSpawnDelay, maxSpawnDelay;//todo settings
+    private float spawnDelayTimer;
+    private bool isGameStarted;
     private Rect innerBox;
     private Rect outerBox;
     [SerializeField] private float outerBoxOffset = 2f;
@@ -16,16 +21,31 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+        GameManager.Instance.OnGameStarted += () => isGameStarted = true;
+        GameManager.Instance.OnGameOver += () => isGameStarted = false;
+    }
 
-        for (int i = 0; i < 20; i++)
-        {
-            var imerr = Instantiate(imer);
-            imerr.transform.position = GetSpawnPosition();
-        }
+    private void Update()
+    {
+        SpawnEnemies();
+    }
+
+    private void SpawnEnemies()
+    {
+        if(!isGameStarted) return;
+        
+        if(Time.time<spawnDelayTimer) return;
+
+        float scoreT = Mathf.InverseLerp(0, 999, GameManager.Instance.GameScore);
+        float spawnDelay = Mathf.Lerp(minSpawnDelay, maxSpawnDelay, scoreT);
+        spawnDelayTimer = Time.time + spawnDelay;
+        
+        var imerr = Instantiate(imer);
+        imerr.transform.position = GetSpawnPosition();
 
     }
 
-   private Vector2 GetSpawnPosition()
+    private Vector2 GetSpawnPosition()
     {
         Vector2 screenSize = new Vector2(Screen.width, Screen.height);
         Vector2 screenBounds = mainCamera.ScreenToWorldPoint(new Vector2(screenSize.x, screenSize.y));

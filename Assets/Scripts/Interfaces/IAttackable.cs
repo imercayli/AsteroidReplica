@@ -8,6 +8,7 @@ public interface IAttackable
     float FireRate { get; }
     int DamagePower { get; }
     List<Transform> ShootingPositions { get; }
+    ObjectPooling<BulletBase> BulletObjectPooling { get; }
     BulletBase BulletBase { get; }
     int BulletInitialSpawnAmount { get; }
     float BulletSpeed { get; }

@@ -5,16 +5,15 @@ using UnityEngine.UI;
 
 public class CustomizationCanvas : MonoBehaviour
 {
-    [SerializeField] private Button shopButton;
+    [SerializeField] private Button customizationButton;
     
-    [SerializeField] private GameObject shopMenu, exclamation;
+    [SerializeField] private GameObject customizationMenu, exclamation;
     
     // Start is called before the first frame update
     void Start()
     {
-        shopMenu.SetActive(false);
-        shopButton.onClick.AddListener(OnShopButtonTap);
-        shopMenu.SetActive(false);
+        customizationMenu.SetActive(false);
+        customizationButton.onClick.AddListener(OnShopButtonTap);
         SetExclamation();
         CurrencyManager.Instance.OnAllCurrenciesUpdate += SetExclamation;
 
@@ -28,7 +27,7 @@ public class CustomizationCanvas : MonoBehaviour
 
     private void OnShopButtonTap()
     {
-        shopMenu.SetActive(true);
+        customizationMenu.SetActive(true);
     }
 
     private void OnDestroy()

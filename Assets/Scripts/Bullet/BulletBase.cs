@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Collider2D))]
 public abstract class BulletBase : MonoBehaviour
 {
     private AttackSystemBase _attackSystemBase;
@@ -23,14 +23,14 @@ public abstract class BulletBase : MonoBehaviour
             Time.deltaTime * _attackSystemBase.BulletSpeed);
     }
     
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
             if (Check(other.gameObject))
             {
                 damageable.ApplyDamage(_attackSystemBase.DamagePower);
-                //send back to pool todo
+                _attackSystemBase.BulletObjectPooling.AddObjectToPool(this);
             }
         }
       

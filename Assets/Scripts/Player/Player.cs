@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoSingleton<Player>//todo
 {
     public PlayerMovement PlayerMovement { get; private set; }
     public PlayerAttack PlayerAttack { get; private set; }
@@ -11,9 +11,10 @@ public class Player : MonoBehaviour
     public PlayerInteraction PlayerInteraction { get; private set; }
     public List<PlayerSkin> PlayerSkins { get; private set; }
     public PlayerSkin CurrentSkin { get; private set; }
-    
-    void Awake()
+
+    protected override void Awake()
     {
+        base.Awake();
         PlayerSkins = GetComponentsInChildren<PlayerSkin>().ToList();
         SetCurrentSkin();
         SaveData.OnPlayerSkinChanged += SetCurrentSkin; 
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
         PlayerHealth = GetComponent<PlayerHealth>().Initialize(this);
         PlayerInteraction = GetComponent<PlayerInteraction>().Initialize(this);
     }
-
+    
     private void SetCurrentSkin()
     {
         PlayerSkins.ForEach(o=>o.gameObject.SetActive(false));

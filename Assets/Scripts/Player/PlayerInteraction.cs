@@ -13,11 +13,13 @@ public class PlayerInteraction : MonoBehaviour
         _player = player;
         return this;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out IInteractable interactable))
         {
             interactable.Interact(_player);
         }
     }
+
+   
 }

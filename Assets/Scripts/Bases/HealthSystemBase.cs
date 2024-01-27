@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public abstract class HealthSystemBase : MonoBehaviour,IDamageable
 {
     public int Health { get; set; }

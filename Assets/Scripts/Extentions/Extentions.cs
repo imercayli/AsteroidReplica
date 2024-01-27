@@ -214,32 +214,43 @@ namespace Extentions
                 suffix = "K";
             }
 
-            //if (abbrevated.Length > 4)
-            //{
-            //    abbrevated = abbrevated.Remove(abbrevated.Length - 3, 3);
-            //    suffix = "K";
+            return abbrevated + suffix;
+        }
+    }
 
-            //    if (abbrevated.Length > 3)
-            //    {
-            //        abbrevated = abbrevated.Remove(abbrevated.Length - 3, 3);
-            //        suffix = "M";
-            //    }
-            //    if (abbrevated.Length > 3)
-            //    {
-            //        abbrevated = abbrevated.Remove(abbrevated.Length - 3, 3);
-            //        suffix = "B";
-            //    }
-            //    if (abbrevated.Length > 3)
-            //    {
-            //        abbrevated = abbrevated.Remove(abbrevated.Length - 3, 3);
-            //        suffix = "T";
-            //    }
-            //    if (abbrevated.Length > 3)
-            //    {
-            //        abbrevated = abbrevated.Remove(abbrevated.Length - 3, 3);
-            //        suffix = "Q";
-            //    }
-            //}
+    public static class LongExtensions
+    {
+        public static string LargeLongToString(this long Value)
+        {
+            string abbrevated = Value.ToString();
+            string suffix = "";
+            string source = abbrevated;
+
+            if (abbrevated.Length > 15)
+            {
+                abbrevated = abbrevated.Remove(abbrevated.Length - 15) + "." + source.Substring(abbrevated.Length - 15, 1);
+                suffix = "Q";
+            }
+            else if (abbrevated.Length > 12)
+            {
+                abbrevated = abbrevated.Remove(abbrevated.Length - 12) + "." + source.Substring(abbrevated.Length - 12, 1);
+                suffix = "T";
+            }
+            else if (abbrevated.Length > 9)
+            {
+                abbrevated = abbrevated.Remove(abbrevated.Length - 9) + "." + source.Substring(abbrevated.Length - 9, 1);
+                suffix = "B";
+            }
+            else if (abbrevated.Length > 6)
+            {
+                abbrevated = abbrevated.Remove(abbrevated.Length - 6) + "." + source.Substring(abbrevated.Length - 6, 1);
+                suffix = "M";
+            }
+            else if (abbrevated.Length > 3)
+            {
+                abbrevated = abbrevated.Remove(abbrevated.Length - 3) + "." + source.Substring(abbrevated.Length - 3, 1);
+                suffix = "K";
+            }
 
             return abbrevated + suffix;
         }

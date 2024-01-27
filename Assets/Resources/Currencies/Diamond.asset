@@ -15,4 +15,5 @@ MonoBehaviour:
   CurrencyName: Diamond
   CurrencyType: 1
   DefaultAmount: 0
-  CurrencyIcon: {fileID: 0}
+  CurrencyLevelObjectBase: {fileID: 2629553195350023662, guid: ebbf66942b6d24b3daac3e4f0ced023c, type: 3}
+  CurrencyIcon: {fileID: 21300000, guid: fdd93a52409cf69489c9a92d23b18759, type: 3}

@@ -15,4 +15,5 @@ MonoBehaviour:
   CurrencyName: Coin
   CurrencyType: 0
   DefaultAmount: 0
-  CurrencyIcon: {fileID: 0}
+  CurrencyLevelObjectBase: {fileID: 7121583991286993139, guid: 28eedb594b43c49dab2d653af885e884, type: 3}
+  CurrencyIcon: {fileID: 21300000, guid: 24d91ca91631e4c4da0691901c74ffb1, type: 3}

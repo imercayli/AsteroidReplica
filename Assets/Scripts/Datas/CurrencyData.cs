@@ -7,6 +7,12 @@ public class CurrencyData : ScriptableObject
     public string CurrencyName;
     public CurrencyType CurrencyType;
     public long DefaultAmount;
+
+    [Header("Level Object")] 
+    public CurrencyLevelObjectBase CurrencyLevelObjectBase;
+    
+    [Space(10)]
+    [Header("UI")]
     public Sprite CurrencyIcon;
 
     public Action OnCurrencyUpdate;
