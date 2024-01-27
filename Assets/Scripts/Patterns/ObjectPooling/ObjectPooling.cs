@@ -32,7 +32,7 @@ public class ObjectPooling<T> where T : MonoBehaviour
     public void AddObjectToPool(T obj)
     {
         if (objectPoolList.Contains(obj)) return;
-
+    
         obj.gameObject.SetActive(false);
         objectPoolList.Add(obj);
     }

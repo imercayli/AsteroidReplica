@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePlayCanvas : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI gameScoreText;
     [SerializeField] private GameObject healthIconTemplate;
      private List<GameObject> healthIcons = new List<GameObject>();
+     [SerializeField] private Button shootButton;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +17,7 @@ public class GamePlayCanvas : MonoBehaviour
         SpawnPlayerHealthIcons();
         Player.Instance.PlayerHealth.OnPlayerHealthChanged += OnPlayerHealthChanged;
         GameManager.Instance.OnScoreChanged += OnScoreChanged;
+        shootButton.onClick.AddListener(OnShootButtonTap);
     }
 
     private void SpawnPlayerHealthIcons()
@@ -24,6 +27,8 @@ public class GamePlayCanvas : MonoBehaviour
             GameObject healthIcon = Instantiate(healthIconTemplate, healthIconTemplate.transform.parent);
             healthIcons.Add(healthIcon);
         }
+        
+        Destroy(healthIconTemplate);
     }
 
     private void OnPlayerHealthChanged(int health)
@@ -37,6 +42,11 @@ public class GamePlayCanvas : MonoBehaviour
     private void OnScoreChanged(int score)
     {
         gameScoreText.text = $"{score}";
+    }
+
+    private void OnShootButtonTap()
+    {
+        Player.Instance.PlayerAttack.Shoot();
     }
 
 }

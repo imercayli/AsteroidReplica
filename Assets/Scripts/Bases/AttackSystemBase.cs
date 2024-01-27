@@ -28,19 +28,14 @@ public abstract class AttackSystemBase : MonoBehaviour,IAttackable
     [SerializeField] private float bulletSpeed;
     public float BulletSpeed => bulletSpeed;
     
-    private bool isActive;
+    protected bool isActive;
     
-    protected void Start()
+    protected virtual void Start()
     {
-        GameManager.Instance.OnGameStarted += () => { isActive = true; };
         _bulletObjectPooling = new ObjectPooling<BulletBase>(BulletBase, transform, BulletInitialSpawnAmount);
+        GameManager.Instance.OnGameOver += () => isActive = false;
     }
-
-    protected void Update()
-    {
-        Shoot();
-    }
-
+    
     public virtual void Shoot()
     {
         if(!isActive) return;
@@ -52,10 +47,13 @@ public abstract class AttackSystemBase : MonoBehaviour,IAttackable
         foreach (Transform shootingPosition in shootingPositions)
         {
             BulletBase bullet = _bulletObjectPooling.GetObjectFromPool();
+            bullet.transform.SetParent(null);
             bullet.transform.position = shootingPosition.transform.position;
-            bullet.transform.rotation = shootingPosition.transform.rotation;
+            bullet.transform.up = GetTargetDirection(shootingPosition);
             bullet.Initialize(this);
         }
 
     }
+
+    protected abstract Vector3 GetTargetDirection(Transform shootingPosition);
 }

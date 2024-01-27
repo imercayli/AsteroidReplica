@@ -30,6 +30,7 @@ public abstract class BulletBase : MonoBehaviour
             if (Check(other.gameObject))
             {
                 damageable.ApplyDamage(_attackSystemBase.DamagePower);
+                transform.SetParent(_attackSystemBase.transform);
                 _attackSystemBase.BulletObjectPooling.AddObjectToPool(this);
             }
         }

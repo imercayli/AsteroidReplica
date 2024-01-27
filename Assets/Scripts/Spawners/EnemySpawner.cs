@@ -35,10 +35,8 @@ public class EnemySpawner : MonoBehaviour
         if(!isGameStarted) return;
         
         if(Time.time<spawnDelayTimer) return;
-
-        float scoreT = Mathf.InverseLerp(0, 999, GameManager.Instance.GameScore);
-        float spawnDelay = Mathf.Lerp(minSpawnDelay, maxSpawnDelay, scoreT);
-        spawnDelayTimer = Time.time + spawnDelay;
+        
+        spawnDelayTimer = Time.time + GameManager.Instance.GameSettings.GetEnemySpawnDelay();
         
         var imerr = Instantiate(imer);
         imerr.transform.position = GetSpawnPosition();

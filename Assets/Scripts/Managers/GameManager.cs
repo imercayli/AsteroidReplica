@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
-{ 
+{
+    public GameSettings GameSettings;
     public int GameScore { get; private set; }
     public bool IsHighScoreReached { get; private set; }
     

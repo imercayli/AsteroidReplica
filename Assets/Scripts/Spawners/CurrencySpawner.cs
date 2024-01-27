@@ -40,7 +40,7 @@ public class CurrencySpawner : MonoBehaviour
         if(!isGameStarted) return;
         if(Time.time<spawnTimer) return;
 
-        spawnTimer = Time.time + Random.Range(minTime, maxTime);
+        spawnTimer = Time.time + GameManager.Instance.GameSettings.GetCurrencySpawnDelay();
         
         int enumLenght = System.Enum.GetValues(typeof(CurrencyType)).Length;
         CurrencyType selectedCurrenyType = (CurrencyType)FormulaExtentions.Formulas.GetRandomEnumByCoefficient(enumLenght);
