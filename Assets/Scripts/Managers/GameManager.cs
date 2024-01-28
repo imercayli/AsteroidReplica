@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void FinishGame()
     {
+        CheckHighScore();
         OnGameOver?.Invoke();
     }
 
@@ -27,11 +28,19 @@ public class GameManager : MonoSingleton<GameManager>
         GameScore += increaseAmount;
         OnScoreChanged?.Invoke(GameScore);
     }
-
-
+    
     public void ReloadScene()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    private void CheckHighScore()
+    {
+        if (GameScore > SaveData.HighScore)
+        {
+            SaveData.HighScore = GameScore;
+            IsHighScoreReached = true;
+        }
     }
     
 }

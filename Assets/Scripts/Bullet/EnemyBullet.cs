@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyBullet : BulletBase
 {
-    protected override bool Check(GameObject gameObject)
+    protected override bool Check(HealthBase healthBase)
     {
-        return gameObject.GetComponent<HealthSystemBase>().CharacterType != CharacterType.Enemy;
+        return healthBase.CharacterType != CharacterType.Enemy;
     }
 }

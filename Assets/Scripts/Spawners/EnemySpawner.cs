@@ -6,50 +6,74 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : SpawnerBase
 {
-    private float spawnDelayTimer;
-    private bool isGameStarted;
-    private Rect innerBox;
-    private Rect outerBox;
+    protected override float delayTime => GameManager.Instance.GameSettings.GetEnemySpawnDelay();
+    [SerializeField] private List<Asteroid> asteroidPrefabs;
+    private List<ObjectPooling<Asteroid>> asteroidsObjectPoolings = new List<ObjectPooling<Asteroid>>();
+    [SerializeField] private Ufo ufoPrefab;
+    private ObjectPooling<Ufo> ufObjectPooling;
     [SerializeField] private float outerBoxOffset = 2f;
-    public EnemyMovement imer; 
-
-    private Camera mainCamera;
-    // Start is called before the first frame update
-    void Start()
+    
+    protected override void CreateObjectPoolings()
     {
-        mainCamera = Camera.main;
-        GameManager.Instance.OnGameStarted += () => isGameStarted = true;
-        GameManager.Instance.OnGameOver += () => isGameStarted = false;
+        foreach (Asteroid asteroidPrefab in asteroidPrefabs)
+        {
+            ObjectPooling<Asteroid> objectPooling = new ObjectPooling<Asteroid>(asteroidPrefab, transform);
+            asteroidsObjectPoolings.Add(objectPooling);
+        }
+
+        ufObjectPooling = new ObjectPooling<Ufo>(ufoPrefab, transform);
+    }
+    
+    protected override void SpawnObject()
+    {
+        bool canUfoSpawn =GameManager.Instance.GameScore >= GameManager.Instance.GameSettings.UfoEnemyStartScore 
+                          &&  GameManager.Instance.GameSettings.GetUfoSpawnChance() > Random.Range(0f, 1f);
+
+        if (canUfoSpawn)
+        {
+            Ufo ufo = ufObjectPooling.GetObjectFromPool();
+            ufo.transform.position = GetSpawnPosition();
+            ufo.EnemySpawned(this);
+        }
+        else
+        {
+            Asteroid asteroid = asteroidsObjectPoolings[0].GetObjectFromPool();
+            asteroid.transform.position = GetSpawnPosition();
+            asteroid.EnemySpawned(this);
+        }
+    }
+    
+    public void OnAstreoidKilled(Asteroid asteroid,bool isDead)
+    {
+        asteroidsObjectPoolings[asteroid.Level-1].AddObjectToPool(asteroid);
+        
+        if(!isDead) return;
+        int newAsteroidLevel = asteroid.Level + 1;
+        if(newAsteroidLevel > asteroidsObjectPoolings.Count) return;
+
+        int spawnCount = 2;
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Asteroid newAsteroid = asteroidsObjectPoolings[newAsteroidLevel-1].GetObjectFromPool();
+            newAsteroid.transform.position = asteroid.transform.position;
+            newAsteroid.EnemySpawned(this);
+        }
     }
 
-    private void Update()
+    public void OnUfoKilled(Ufo ufo,bool isDead)
     {
-        SpawnEnemies();
+        ufObjectPooling.AddObjectToPool(ufo);
     }
-
-    private void SpawnEnemies()
-    {
-        if(!isGameStarted) return;
-        
-        if(Time.time<spawnDelayTimer) return;
-        
-        spawnDelayTimer = Time.time + GameManager.Instance.GameSettings.GetEnemySpawnDelay();
-        
-        var imerr = Instantiate(imer);
-        imerr.transform.position = GetSpawnPosition();
-        imerr.Initialize();
-
-    }
-
-    private Vector2 GetSpawnPosition()
+    
+    protected override Vector2 GetSpawnPosition()
     {
         Vector2 screenSize = new Vector2(Screen.width, Screen.height);
         Vector2 screenBounds = mainCamera.ScreenToWorldPoint(new Vector2(screenSize.x, screenSize.y));
 
-         innerBox = new Rect(-screenBounds.x, -screenBounds.y, screenBounds.x * 2, screenBounds.y * 2);
-         outerBox = new Rect(innerBox.xMin - outerBoxOffset, innerBox.yMin - outerBoxOffset, innerBox.width + outerBoxOffset * 2, innerBox.height + outerBoxOffset * 2);
+        Rect innerBox = new Rect(-screenBounds.x, -screenBounds.y, screenBounds.x * 2, screenBounds.y * 2);
+        Rect outerBox = new Rect(innerBox.xMin - outerBoxOffset, innerBox.yMin - outerBoxOffset, innerBox.width + outerBoxOffset * 2, innerBox.height + outerBoxOffset * 2);
 
         Vector2 spawnPosition;
         do
@@ -62,39 +86,5 @@ public class EnemySpawner : MonoBehaviour
 
         return spawnPosition;
     }
-   
-   void OnDrawGizmos()
-   {
-       Camera mainCamera = Camera.main;
-       if (!mainCamera) return;
-
-       // Calculate screen bounds in world coordinates
-       float vertExtent = mainCamera.orthographicSize;
-       float horzExtent = vertExtent * Screen.width / Screen.height;
-
-       // Inner box (screen size)
-       Vector3 bottomLeft = mainCamera.transform.position - new Vector3(horzExtent, vertExtent, 0);
-       Vector3 topLeft = mainCamera.transform.position + new Vector3(-horzExtent, vertExtent, 0);
-       Vector3 bottomRight = mainCamera.transform.position + new Vector3(horzExtent, -vertExtent, 0);
-       Vector3 topRight = mainCamera.transform.position + new Vector3(horzExtent, vertExtent, 0);
-
-       Gizmos.color = Color.red;
-       Gizmos.DrawLine(bottomLeft, topLeft);
-       Gizmos.DrawLine(topLeft, topRight);
-       Gizmos.DrawLine(topRight, bottomRight);
-       Gizmos.DrawLine(bottomRight, bottomLeft);
-
-       // Outer box
-       Vector3 outerBottomLeft = bottomLeft - new Vector3(outerBoxOffset, outerBoxOffset, 0);
-       Vector3 outerTopLeft = topLeft + new Vector3(-outerBoxOffset, outerBoxOffset, 0);
-       Vector3 outerBottomRight = bottomRight + new Vector3(outerBoxOffset, -outerBoxOffset, 0);
-       Vector3 outerTopRight = topRight + new Vector3(outerBoxOffset, outerBoxOffset, 0);
-
-       Gizmos.color = Color.green;
-       Gizmos.DrawLine(outerBottomLeft, outerTopLeft);
-       Gizmos.DrawLine(outerTopLeft, outerTopRight);
-       Gizmos.DrawLine(outerTopRight, outerBottomRight);
-       Gizmos.DrawLine(outerBottomRight, outerBottomLeft);
-   }
 }
 

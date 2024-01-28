@@ -51,21 +51,15 @@ SpriteAtlas:
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
     - d9dfd558076f548f195d7e838f09e67f: 21300000
-    - 09cb74a8a45f54bb48e7e04247138799: 21300000
-    - 7fc31c390b40e40f89f9c833b4d8564b: 21300000
     - f1953c3d0309940aba6d41cc9d185a7e: 21300000
     - d18f479ed88bc4068a93a775fa1af319: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: d9dfd558076f548f195d7e838f09e67f, type: 3}
-  - {fileID: 21300000, guid: 09cb74a8a45f54bb48e7e04247138799, type: 3}
-  - {fileID: 21300000, guid: 7fc31c390b40e40f89f9c833b4d8564b, type: 3}
   - {fileID: 21300000, guid: f1953c3d0309940aba6d41cc9d185a7e, type: 3}
   - {fileID: 21300000, guid: d18f479ed88bc4068a93a775fa1af319, type: 3}
   m_PackedSpriteNamesToIndex:
   - Hand
-  - Shine
-  - pngwing.com-40
   - heart
   - pngwing.com-45
   m_RenderDataMap: {}

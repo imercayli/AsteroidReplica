@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerBullet : BulletBase
 {
     public List<PlayerBulletSkin> PlayerBulletSkins { get; private set; }
-    public override void Initialize(AttackSystemBase attackSystemBase)
+    public override void Initialize(AttackBase attackBase)
     {
-        base.Initialize(attackSystemBase);
+        base.Initialize(attackBase);
         
         PlayerBulletSkins = GetComponentsInChildren<PlayerBulletSkin>(true).ToList();
         SetCurrentSkin();
@@ -22,8 +22,8 @@ public class PlayerBullet : BulletBase
         PlayerBulletSkin.gameObject.SetActive(true);
     }
 
-    protected override bool Check(GameObject gameObject)
+    protected override bool Check(HealthBase healthBase)
     {
-        return gameObject.GetComponent<HealthSystemBase>().CharacterType != CharacterType.Player;
+        return healthBase.CharacterType != CharacterType.Player;
     }
 }

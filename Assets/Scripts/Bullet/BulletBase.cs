@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
-public abstract class BulletBase : MonoBehaviour
+public abstract class BulletBase : MonoBehaviour,IKillable
 {
-    private AttackSystemBase _attackSystemBase;
+    private AttackBase _attackBase;
+    public int DamageAmount => _attackBase.DamageAmount;
     
-    public virtual void Initialize(AttackSystemBase attackSystemBase)
+    public virtual void Initialize(AttackBase attackBase)
     {
-        _attackSystemBase = attackSystemBase;
+        _attackBase = attackBase;
     }
 
     protected virtual void Update()
@@ -20,22 +21,17 @@ public abstract class BulletBase : MonoBehaviour
     protected virtual void Move()
     {
         transform.position = Vector3.Lerp(transform.position, transform.position + transform.up,
-            Time.deltaTime * _attackSystemBase.BulletSpeed);
+            Time.deltaTime * _attackBase.BulletSpeed);
     }
     
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    public void GiveDamage(HealthBase healthBase)
     {
-        if (other.gameObject.TryGetComponent(out IDamageable damageable))
-        {
-            if (Check(other.gameObject))
-            {
-                damageable.ApplyDamage(_attackSystemBase.DamagePower);
-                transform.SetParent(_attackSystemBase.transform);
-                _attackSystemBase.BulletObjectPooling.AddObjectToPool(this);
-            }
-        }
-      
+        if (!Check(healthBase)) return;
+        
+        healthBase.TakeDamage(DamageAmount);
+        transform.SetParent(_attackBase.transform);
+        _attackBase.BulletObjectPooling.AddObjectToPool(this);
     }
-
-    protected abstract bool Check(GameObject gameObject);
+    
+    protected abstract bool Check(HealthBase healthBase);
 }

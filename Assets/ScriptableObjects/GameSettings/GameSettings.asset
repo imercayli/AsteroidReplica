@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minScoreForSettings: 0
   maxScoreForSettings: 500
-  enemySpeedMin: 0.5
-  enemySpeedMax: 5
-  enemySpawnDelayMin: 1
+  enemySpeedMin: 3
+  enemySpeedMax: 10
+  enemySpawnDelayMin: 3
   enemySpawnDelayMax: 0.1
   ufoEnemyStartScore: 20
+  ufoSpawnChanceMin: 0.2
+  ufoSpawnChanceMax: 0.7
   currencySpawnDelayMin: 20
   currencySpawnDelayMax: 60

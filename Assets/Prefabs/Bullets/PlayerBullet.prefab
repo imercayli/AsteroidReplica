@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8912816954578867852}
   - component: {fileID: 3666954264625684480}
   - component: {fileID: 8381451038432670561}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSkin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3946328238804272231}
   - component: {fileID: 5200713240729751133}
   - component: {fileID: 4874594109627506453}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSkin3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 3720616938409461163}
   - component: {fileID: 2258548939622271008}
   - component: {fileID: 7711854921952470411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSkin4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 4772733975389880439}
   - component: {fileID: 4100691157833502934}
   - component: {fileID: 1394732337716405385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSkin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 4846430953436524792}
   - component: {fileID: 2315392811027030877}
   - component: {fileID: 1429766295785877921}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

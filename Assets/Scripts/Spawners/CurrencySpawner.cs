@@ -2,28 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurrencySpawner : MonoBehaviour
+public class CurrencySpawner : SpawnerBase
 {
+    protected override float delayTime => GameManager.Instance.GameSettings.GetCurrencySpawnDelay();
     private Dictionary<CurrencyType,ObjectPooling<CurrencyLevelObjectBase>> _currencyTypesObjectPooling = new();
-    private float spawnTimer;
     
-    private Camera mainCamera;
-    private bool isGameStarted;
-    // Start is called before the first frame update
-    void Start()
-    { 
-        mainCamera = Camera.main;
-        GameManager.Instance.OnGameStarted += () => isGameStarted = true;
-        GameManager.Instance.OnGameOver += () => isGameStarted = false;
-       CreateObjectPoolings();   
-    }
-
-    void Update()
-    {
-        SpawnCurrencyObject();
-    }
-    
-    private void CreateObjectPoolings()
+    protected override void CreateObjectPoolings()
     {
         foreach (CurrencyData currencyData in CurrencyManager.Instance.GetAllCurrencyDatas)
         {
@@ -33,27 +17,22 @@ public class CurrencySpawner : MonoBehaviour
             _currencyTypesObjectPooling.Add(currencyData.CurrencyType,objectPooling);
         }
     }
-
-    private void SpawnCurrencyObject()
+    
+    protected override void SpawnObject()
     {
-        if(!isGameStarted) return;
-        if(Time.time<spawnTimer) return;
-
-        spawnTimer = Time.time + GameManager.Instance.GameSettings.GetCurrencySpawnDelay();
-        
         int enumLenght = System.Enum.GetValues(typeof(CurrencyType)).Length;
         CurrencyType selectedCurrenyType = (CurrencyType)FormulaExtentions.Formulas.GetRandomEnumByCoefficient(enumLenght);
         CurrencyLevelObjectBase currencyLevelObjectBase = _currencyTypesObjectPooling[selectedCurrenyType].GetObjectFromPool();
         currencyLevelObjectBase.transform.position = GetSpawnPosition();
         currencyLevelObjectBase.Initialize(this);
     }
-
+    
     public void AddToPool(CurrencyLevelObjectBase currencyLevelObjectBase)
     {
         _currencyTypesObjectPooling[currencyLevelObjectBase.CurrencyType].AddObjectToPool(currencyLevelObjectBase);
     }
     
-    private Vector2 GetSpawnPosition()
+    protected override Vector2 GetSpawnPosition()
     {
         Vector2 screenSize = new Vector2(Screen.width, Screen.height);
         Vector2 screenBounds = mainCamera.ScreenToWorldPoint(new Vector2(screenSize.x, screenSize.y));

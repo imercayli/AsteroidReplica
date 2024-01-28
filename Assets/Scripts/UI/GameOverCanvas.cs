@@ -22,7 +22,7 @@ public class GameOverCanvas : MonoBehaviour
     {
         newHighScoreText.SetActive(false); 
         float score=0;
-        DOTween.To(() => 0, x => score = x, GameManager.Instance.GameScore, .5f)
+        DOTween.To(() => 0, x => score = x, GameManager.Instance.GameScore, .75f)
             .OnUpdate(() =>
             {
                 scoreText.text = $"Score : {score}";

@@ -6,7 +6,7 @@ public interface IAttackable
 {
     float FireTime { get; set; }
     float FireRate { get; }
-    int DamagePower { get; }
+    int DamageAmount { get; }
     List<Transform> ShootingPositions { get; }
     ObjectPooling<BulletBase> BulletObjectPooling { get; }
     BulletBase BulletBase { get; }

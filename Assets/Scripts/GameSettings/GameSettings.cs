@@ -20,7 +20,13 @@ public class GameSettings : ScriptableObject
   [SerializeField] private float enemySpawnDelayMin;
   [SerializeField] private float enemySpawnDelayMax;
   public float GetEnemySpawnDelay() => Mathf.Lerp(enemySpawnDelayMin, enemySpawnDelayMax, ScoreT);
-  [SerializeField] private float ufoEnemyStartScore;
+  [Space(5)]
+  [SerializeField] private int ufoEnemyStartScore;
+
+  public int UfoEnemyStartScore => ufoEnemyStartScore;
+  [SerializeField] private float ufoSpawnChanceMin;
+  [SerializeField] private float ufoSpawnChanceMax;
+  public float GetUfoSpawnChance() => Mathf.Lerp(ufoSpawnChanceMin, ufoSpawnChanceMax, ScoreT);
   public float GetUfoEnemyStartTime => ufoEnemyStartScore;
   
   [Header("Currency Spawn")]

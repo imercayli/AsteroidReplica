@@ -7,5 +7,5 @@ public interface IDamageable
     int Health { get; set; }
     int MaxHealth { get; }
 
-    void ApplyDamage(int damage);
+    void TakeDamage(int damage);
 }

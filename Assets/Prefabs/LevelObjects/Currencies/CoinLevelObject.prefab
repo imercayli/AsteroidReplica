@@ -133,3 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7ebf30ca1e946d3a78834bd21dd065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleColor: {r: 1, g: 0.8640462, b: 0, a: 1}
