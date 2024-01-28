@@ -10,7 +10,7 @@ public class PlayerBullet : BulletBase
     {
         base.Initialize(attackSystemBase);
         
-        PlayerBulletSkins = GetComponentsInChildren<PlayerBulletSkin>().ToList();
+        PlayerBulletSkins = GetComponentsInChildren<PlayerBulletSkin>(true).ToList();
         SetCurrentSkin();
         SaveData.OnPlayerSkinChanged += SetCurrentSkin; 
     }

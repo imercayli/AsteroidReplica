@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f3718ba9b80d4a048d4b1879b89d1ea, type: 3}
-  m_Name: PlayerSkin0
+  m_Name: PlayerSkin4
   m_EditorClassIdentifier: 
-  Id: 0
-  IsDefault: 0
-  UnlockCurrencyData: {fileID: 0}
-  UnlockLevelAmount: 0
-  UIImage: {fileID: 0}
+  Id: 4
+  UnlockCurrencyData: {fileID: 11400000, guid: 18bffddc63a50430d8e6b07b2ea8a612, type: 2}
+  UnlockLevelAmount: 20
+  UIImage: {fileID: 21300000, guid: e8c998fb5b70a40228209f80fb8356c4, type: 3}

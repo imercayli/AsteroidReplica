@@ -50,20 +50,44 @@ SpriteAtlas:
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
+    - 8ad796d0faf4844d8a661da60070c6a7: 21300000
+    - 33f078087dc1f449db15d86182069f29: 21300000
+    - 7ee494e86937c4c3383176b01129b25d: 21300000
+    - 7139762a4c3e747ef9a1f89f341676b1: 21300000
+    - 593fd97a760e648c1a5f2cb1f0e46375: 21300000
+    - e8c998fb5b70a40228209f80fb8356c4: 21300000
     - 94ef3aac96a30498f805781894741772: 21300000
     - 530d12bc391234e39b97b797caa89bef: 21300000
+    - 321e1a0ddf97c4af5bf5d1cebcb62213: 21300000
     - d9ea902d3925f4eda87904d3dd3d9a98: 21300000
+    - 8d58a02fb7fa3445893d1cd27d9697a3: 21300000
     - 64d83bff540e54f078df5c11383ec45c: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 8ad796d0faf4844d8a661da60070c6a7, type: 3}
+  - {fileID: 21300000, guid: 33f078087dc1f449db15d86182069f29, type: 3}
+  - {fileID: 21300000, guid: 7ee494e86937c4c3383176b01129b25d, type: 3}
+  - {fileID: 21300000, guid: 7139762a4c3e747ef9a1f89f341676b1, type: 3}
+  - {fileID: 21300000, guid: 593fd97a760e648c1a5f2cb1f0e46375, type: 3}
+  - {fileID: 21300000, guid: e8c998fb5b70a40228209f80fb8356c4, type: 3}
   - {fileID: 21300000, guid: 94ef3aac96a30498f805781894741772, type: 3}
   - {fileID: 21300000, guid: 530d12bc391234e39b97b797caa89bef, type: 3}
+  - {fileID: 21300000, guid: 321e1a0ddf97c4af5bf5d1cebcb62213, type: 3}
   - {fileID: 21300000, guid: d9ea902d3925f4eda87904d3dd3d9a98, type: 3}
+  - {fileID: 21300000, guid: 8d58a02fb7fa3445893d1cd27d9697a3, type: 3}
   - {fileID: 21300000, guid: 64d83bff540e54f078df5c11383ec45c, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Ship3
+  - Ship2
+  - Bullet1
+  - Bullet2
+  - Bullet3
+  - Ship4
   - Activev
   - Exclamation
+  - Bullet4
   - CloseButton
+  - Ship1
   - CustomizationIcon
   m_RenderDataMap: {}
   m_Tag: CustomizationSpriteAtlas

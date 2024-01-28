@@ -178,6 +178,13 @@ namespace Extentions
             else str = "th";
             return num.ToString() + str;
         }
+
+        public static string TitleCase(this string text)
+        {
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+
+            return textInfo.ToTitleCase(text); 
+        }
     }
 
     public static class IntegerExtensions

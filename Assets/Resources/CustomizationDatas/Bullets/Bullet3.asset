@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefb977c274304e31996e49273ed11a0, type: 3}
   m_Name: Bullet3
   m_EditorClassIdentifier: 
-  Id: 0
-  IsDefault: 0
-  UnlockCurrencyData: {fileID: 0}
-  UnlockLevelAmount: 0
-  UIImage: {fileID: 0}
+  Id: 3
+  UnlockCurrencyData: {fileID: 11400000, guid: 18bffddc63a50430d8e6b07b2ea8a612, type: 2}
+  UnlockLevelAmount: 10
+  UIImage: {fileID: 21300000, guid: 593fd97a760e648c1a5f2cb1f0e46375, type: 3}

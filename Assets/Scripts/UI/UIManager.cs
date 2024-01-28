@@ -8,6 +8,7 @@ public class UIManager : MonoSingleton<UIManager>
     public CurrencyCanvas CurrencyCanvas;
     public GamePlayCanvas GamePlayCanvas;
     public GameOverCanvas GameOverCanvas;
+    public CustomizationCanvas CustomizationCanvas;
     
     void Start()
     {
@@ -20,6 +21,7 @@ public class UIManager : MonoSingleton<UIManager>
     private void OnGameStarted()
     {
         StartCanvas.gameObject.SetActive(false);
+        CustomizationCanvas.gameObject.SetActive(false);
         GamePlayCanvas.gameObject.SetActive(true);
     }
     private void OnGameFinished()

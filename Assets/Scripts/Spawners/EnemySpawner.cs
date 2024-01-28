@@ -8,13 +8,12 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public float minSpawnDelay, maxSpawnDelay;//todo settings
     private float spawnDelayTimer;
     private bool isGameStarted;
     private Rect innerBox;
     private Rect outerBox;
     [SerializeField] private float outerBoxOffset = 2f;
-    public GameObject imer; 
+    public EnemyMovement imer; 
 
     private Camera mainCamera;
     // Start is called before the first frame update
@@ -40,6 +39,7 @@ public class EnemySpawner : MonoBehaviour
         
         var imerr = Instantiate(imer);
         imerr.transform.position = GetSpawnPosition();
+        imerr.Initialize();
 
     }
 

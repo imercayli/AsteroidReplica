@@ -16,16 +16,13 @@ public class CurrencyItemUI : MonoBehaviour
     {
         _currencyData = currencyData;
         icon.sprite = _currencyData.CurrencyIcon;
-        _currencyData.OnCurrencyUpdate += (delegate { SetCurrencyAmount(true); });
-        SetCurrencyAmount(false);
+        _currencyData.OnCurrencyUpdate += SetCurrencyAmount;
+        SetCurrencyAmount();
         
     }
 
-    private void SetCurrencyAmount(bool withAnim)
+    private void SetCurrencyAmount()
     {
         amountText.text = $"{_currencyData.CurrencyAmount.LargeLongToString()}";
-        
-        if(withAnim)
-            amountText.transform.DOPunchScale(Vector3.one * 0.25f, 0.25f);
     }
 }

@@ -132,8 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f758258a686d24d2fb10272495bc3823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  angleRange: 45
+  angleRange: 0
 --- !u!114 &3133251391038660362
 MonoBehaviour:
   m_ObjectHideFlags: 0

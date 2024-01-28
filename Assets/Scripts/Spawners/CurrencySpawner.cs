@@ -5,7 +5,6 @@ using UnityEngine;
 public class CurrencySpawner : MonoBehaviour
 {
     private Dictionary<CurrencyType,ObjectPooling<CurrencyLevelObjectBase>> _currencyTypesObjectPooling = new();
-    [SerializeField] private float minTime, maxTime;
     private float spawnTimer;
     
     private Camera mainCamera;

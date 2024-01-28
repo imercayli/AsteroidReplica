@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Extentions;
@@ -12,17 +13,23 @@ public class CustomizationItemButton : MonoBehaviour
     [SerializeField] private GameObject currentFrame, unlockGroup, lockGroup;
     [SerializeField ]private TextMeshProUGUI unlockCurrenyAmount;
     [SerializeField] private Button selectButton, unlockButton;
-    [SerializeField] private GameObject selectedImage,exclamation;
+    [SerializeField] private GameObject selectedImage;
     [SerializeField] private Image currencyIconImage;
     
     public void Initialize(CustomizationDataBase customizationDataBase)
     {
         _customizationDataBase = customizationDataBase;
         SetUI();
-        _customizationDataBase.UnlockCurrencyData.OnCurrencyUpdate += SetUI;
         SetButtonListeners();
     }
 
+    private void OnEnable()
+    {
+        if(!_customizationDataBase) return;
+        
+        CurrencyManager.Instance.OnAllCurrenciesUpdate += SetUI;
+    }
+    
     private void SetUI()
     {
         itemImage.sprite = _customizationDataBase.UIImage;
@@ -38,19 +45,16 @@ public class CustomizationItemButton : MonoBehaviour
             currentFrame.SetActive(isCurrentItem);
             selectButton.gameObject.SetActive(!isCurrentItem);
             selectedImage.SetActive(isCurrentItem);
-            exclamation.SetActive(false);
 
         }
         else
         {
             currentFrame.SetActive(false);
 
-            bool isCurrencyEnough = _customizationDataBase.UnlockCurrencyData.CurrencyAmount >= _customizationDataBase.UnlockLevelAmount;
+            bool isCurrencyEnough = _customizationDataBase.CanAfford();
             
             unlockButton.interactable = isCurrencyEnough;
             unlockCurrenyAmount.text = _customizationDataBase.UnlockLevelAmount.LargeIntToString();
-
-            exclamation.SetActive(isCurrencyEnough);
 
         }
     }
@@ -70,9 +74,11 @@ public class CustomizationItemButton : MonoBehaviour
     {
        _customizationDataBase.UnlockItem();
     }
-
-    private void OnDestroy()
+    
+    private void OnDisable()
     {
-        _customizationDataBase.UnlockCurrencyData.OnCurrencyUpdate -= SetUI;
+        if(!_customizationDataBase) return;
+        CurrencyManager.Instance.OnAllCurrenciesUpdate -= SetUI;
     }
+
 }

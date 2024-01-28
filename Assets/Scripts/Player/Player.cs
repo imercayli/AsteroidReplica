@@ -15,7 +15,7 @@ public class Player : MonoSingleton<Player>//todo
     protected override void Awake()
     {
         base.Awake();
-        PlayerSkins = GetComponentsInChildren<PlayerSkin>().ToList();
+        PlayerSkins = GetComponentsInChildren<PlayerSkin>(true).ToList();
         SetCurrentSkin();
         SaveData.OnPlayerSkinChanged += SetCurrentSkin; 
         
