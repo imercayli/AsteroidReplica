@@ -52,4 +52,9 @@ public class Player : MonoSingleton<Player>
         OnReborn?.Invoke(rebornTime);
         CurrentSkin.Reborn(rebornTime);
     }
+
+    private void OnDestroy()
+    {
+         SaveData.OnPlayerSkinChanged -= SetCurrentSkin; 
+    }
 }

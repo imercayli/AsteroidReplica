@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ public class PlayerBullet : BulletBase
         
         PlayerBulletSkins = GetComponentsInChildren<PlayerBulletSkin>(true).ToList();
         SetCurrentSkin();
-        SaveData.OnPlayerSkinChanged += SetCurrentSkin; 
+        SaveData.OnBulletChanged += SetCurrentSkin; 
     }
     
     private void SetCurrentSkin()
@@ -25,5 +26,10 @@ public class PlayerBullet : BulletBase
     protected override bool Check(HealthBase healthBase)
     {
         return healthBase.CharacterType != CharacterType.Player;
+    }
+
+    private void OnDisable()
+    {
+        SaveData.OnBulletChanged -= SetCurrentSkin; 
     }
 }

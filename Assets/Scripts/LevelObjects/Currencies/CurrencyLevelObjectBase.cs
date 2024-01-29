@@ -5,18 +5,12 @@ using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public abstract class CurrencyLevelObjectBase : LevelObjectBase,IPlayerInteractable
+public abstract class CurrencyLevelObjectBase : MonoBehaviour,IPlayerInteractable
 {
     public abstract CurrencyType CurrencyType { get; }
     private CurrencySpawner _currencySpawner;
     [SerializeField] protected Color particleColor;
-    
-   // public override void Initialize(SpawnerBase spawnerBase)
-   // {
-   //     base.Initialize(spawnerBase);
-   //     transform.DOScale(1, .5f).From(0);
-   // }
-
+   
    public void Initialize(CurrencySpawner currencySpawner)
    {
        _currencySpawner = currencySpawner;
