@@ -6,7 +6,7 @@ public class CurrencySpawner : SpawnerBase
 {
     protected override float delayTime => GameManager.Instance.GameSettings.GetCurrencySpawnDelay();
     private Dictionary<CurrencyType,ObjectPooling<CurrencyLevelObjectBase>> _currencyTypesObjectPooling = new();
-    
+    [SerializeField] private float boxOffset = .75f;
     protected override void CreateObjectPoolings()
     {
         foreach (CurrencyData currencyData in CurrencyManager.Instance.GetAllCurrencyDatas)
@@ -40,7 +40,7 @@ public class CurrencySpawner : SpawnerBase
         Rect innerBox = new Rect(-screenBounds.x, -screenBounds.y, screenBounds.x * 2, screenBounds.y * 2);
         float x = Random.Range(innerBox.xMin, innerBox.xMax);
         float y = Random.Range(innerBox.yMin, innerBox.yMax);
-        Vector2 spawnPosition = new Vector2(x, y);
+        Vector2 spawnPosition = new Vector2(x, y) * boxOffset;
 
         return spawnPosition;
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public abstract class AttackBase : MonoBehaviour,IAttackable
 {
@@ -61,5 +62,6 @@ public abstract class AttackBase : MonoBehaviour,IAttackable
     public void SetActivation(bool isActive)
     {
         _isActive = isActive;
+        FireTime = Time.time + Random.Range(0.5f,1f);
     }
 }

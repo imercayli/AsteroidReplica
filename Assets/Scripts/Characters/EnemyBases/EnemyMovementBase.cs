@@ -16,7 +16,7 @@ public abstract class EnemyMovementBase : MonoBehaviour
         return this;
     }
     
-    protected void SetMoveDirection()
+    protected virtual void SetMoveDirection()
     {
         Vector3  centerPosition =Vector3.zero;
         moveDirection = (centerPosition - transform.position).normalized;

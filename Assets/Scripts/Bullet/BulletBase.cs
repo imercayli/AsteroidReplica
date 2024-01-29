@@ -7,10 +7,12 @@ public abstract class BulletBase : MonoBehaviour,IKillable
 {
     private AttackBase _attackBase;
     public int DamageAmount => _attackBase.DamageAmount;
+  
     
     public virtual void Initialize(AttackBase attackBase)
     {
         _attackBase = attackBase;
+        StartCoroutine(BackToPoolRoutine());
     }
 
     protected virtual void Update()
@@ -29,9 +31,19 @@ public abstract class BulletBase : MonoBehaviour,IKillable
         if (!Check(healthBase)) return;
         
         healthBase.TakeDamage(DamageAmount);
+        StopCoroutine(BackToPoolRoutine());
         transform.SetParent(_attackBase.transform);
         _attackBase.BulletObjectPooling.AddObjectToPool(this);
     }
     
     protected abstract bool Check(HealthBase healthBase);
+
+    private IEnumerator BackToPoolRoutine()
+    {
+        float waitTime = 5;
+        yield return new WaitForSeconds(waitTime);
+        transform.SetParent(_attackBase.transform);
+        _attackBase.BulletObjectPooling.AddObjectToPool(this);
+
+    }
 }

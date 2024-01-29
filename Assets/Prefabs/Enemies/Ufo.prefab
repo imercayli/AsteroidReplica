@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleRange: 45
+  changeMoveAngleRange: 150
 --- !u!114 &9199322086987478250
 MonoBehaviour:
   m_ObjectHideFlags: 0

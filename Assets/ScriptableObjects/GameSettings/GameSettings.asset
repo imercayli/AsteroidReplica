@@ -18,7 +18,7 @@ MonoBehaviour:
   enemySpeedMax: 10
   enemySpawnDelayMin: 3
   enemySpawnDelayMax: 0.1
-  ufoEnemyStartScore: 20
+  ufoEnemyStartScore: 10
   ufoSpawnChanceMin: 0.2
   ufoSpawnChanceMax: 0.7
   currencySpawnDelayMin: 20
